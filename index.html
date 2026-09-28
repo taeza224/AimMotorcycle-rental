@@ -1,0 +1,469 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>บริการจองรถเช่า - เอมรถเช่าสุราษฎร์</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Prompt -->
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Prompt', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 via-sky-100 to-blue-200 min-h-screen text-slate-700 font-light flex flex-col justify-between">
+
+  <!-- Header / Navigation -->
+  <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-blue-100">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between flex-wrap gap-3">
+      <!-- Logo -->
+      <div class="flex items-center space-x-3">
+        <div class="bg-blue-600 text-white p-2.5 rounded-xl shadow-md">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 17a2 2 0 100 4 2 2 0 000-4ptm0 0a2 2 0 100 4 2 2 0 000-4ptm-5-8h14l1 5H4l1-5ptm3-3h8l1 3H7l1-3z" />
+          </svg>
+        </div>
+        <span class="text-xl font-bold text-blue-900 tracking-wide">เอมรถเช่า<span class="text-sky-500 font-normal">สุราษฎร์</span></span>
+      </div>
+
+      <!-- Right Controls: Contact Call Button & Language Switcher -->
+      <div class="flex items-center gap-3">
+        <!-- Phone Contact Button -->
+        <a href="tel:0808612547" class="flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-full border border-blue-200 transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+          <span>080-861-2547</span>
+        </a>
+
+        <!-- Language Switcher Buttons -->
+        <div class="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs font-semibold">
+          <button type="button" id="langTH" onclick="changeLanguage('th')" 
+            class="px-3 py-1 rounded-lg transition-all duration-200 shadow-sm bg-blue-600 text-white">
+            TH
+          </button>
+          <button type="button" id="langEN" onclick="changeLanguage('en')" 
+            class="px-3 py-1 rounded-lg transition-all duration-200 text-slate-600 hover:text-blue-600">
+            EN
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="max-w-4xl mx-auto px-4 py-8 w-full">
+    <!-- Hero Title -->
+    <div class="text-center mb-8">
+      <h1 data-i18n="heroTitle" class="text-3xl md:text-4xl font-bold text-blue-900 mb-2">บริการเช่ารถเดินทาง สุราษฎร์ธานี</h1>
+      <p data-i18n="heroDesc" class="text-blue-600 font-normal">กรอกข้อมูลเพื่อทำการจองรถเช่าได้ทันที พร้อมส่งใบจองเข้า LINE</p>
+    </div>
+
+    <!-- Booking Card Container -->
+    <div class="bg-white rounded-3xl shadow-xl border border-blue-100 p-6 md:p-10">
+      <form id="bookingForm" class="space-y-6">
+        
+        <!-- Section 1: ข้อมูลผู้ยืม -->
+        <div>
+          <h2 class="text-lg font-semibold text-blue-900 mb-3 flex items-center gap-2">
+            <span class="w-2 h-6 bg-blue-600 rounded-full inline-block"></span>
+            <span data-i18n="sec1Title">1. ข้อมูลผู้ยืมรถ</span>
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label for="borrowerName" class="block text-sm font-medium text-slate-700 mb-1">
+                <span data-i18n="nameLabel">ชื่อ - นามสกุล ผู้ยืมรถ</span> <span class="text-red-500">*</span>
+              </label>
+              <input type="text" id="borrowerName" required data-i18n-placeholder="namePlaceholder" placeholder="เช่น นายสมชาย ใจดี"
+                class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition outline-none bg-slate-50 focus:bg-white">
+            </div>
+            <div>
+              <label for="borrowerPhone" class="block text-sm font-medium text-slate-700 mb-1">
+                <span data-i18n="phoneLabel">เบอร์โทรศัพท์ติดต่อ</span> <span class="text-red-500">*</span>
+              </label>
+              <input type="tel" id="borrowerPhone" required data-i18n-placeholder="phonePlaceholder" placeholder="เช่น 080-861-2547"
+                class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition outline-none bg-slate-50 focus:bg-white">
+            </div>
+          </div>
+        </div>
+
+        <hr class="border-slate-100">
+
+        <!-- Section 2: เลือกรถเช่า -->
+        <div>
+          <h2 class="text-lg font-semibold text-blue-900 mb-3 flex items-center gap-2">
+            <span class="w-2 h-6 bg-blue-600 rounded-full inline-block"></span>
+            <span data-i18n="sec2Title">2. เลือกรถเช่า</span>
+          </h2>
+          <div>
+            <label for="vehicleSelect" class="block text-sm font-medium text-slate-700 mb-1">
+              <span data-i18n="vehicleLabel">รุ่นรถที่ต้องการเช่า</span> <span class="text-red-500">*</span>
+            </label>
+            <select id="vehicleSelect" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition outline-none bg-slate-50 focus:bg-white">
+              <option value="" data-i18n="optSelectVehicle">-- กรุณาเลือกรถ --</option>
+              <option value="scoopy" data-i18n="optScoopy">Honda Scoopy i (300 บาท/วัน)</option>
+              <option value="wave" data-i18n="optWave">Honda Wave (300 บาท/วัน)</option>
+              <option value="click" data-i18n="optClick">Honda Click (300 บาท/วัน)</option>
+            </select>
+          </div>
+        </div>
+
+        <hr class="border-slate-100">
+
+        <!-- Section 3: วันและเวลาการยืม-คืน -->
+        <div>
+          <h2 class="text-lg font-semibold text-blue-900 mb-3 flex items-center gap-2">
+            <span class="w-2 h-6 bg-blue-600 rounded-full inline-block"></span>
+            <span data-i18n="sec3Title">3. ระยะเวลาและกำหนดการ</span>
+          </h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- วันรับรถ -->
+            <div>
+              <label for="pickupDateTime" class="block text-sm font-medium text-slate-700 mb-1">
+                <span data-i18n="pickupDateLabel">วันและเวลาที่รับรถ</span> <span class="text-red-500">*</span>
+              </label>
+              <input type="datetime-local" id="pickupDateTime" required
+                class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition outline-none bg-slate-50 focus:bg-white">
+            </div>
+
+            <!-- วันคืนรถ -->
+            <div>
+              <label for="returnDateTime" class="block text-sm font-medium text-slate-700 mb-1">
+                <span data-i18n="returnDateLabel">วันและเวลาที่คืนรถ</span> <span class="text-red-500">*</span>
+              </label>
+              <input type="datetime-local" id="returnDateTime" required
+                class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition outline-none bg-slate-50 focus:bg-white">
+            </div>
+          </div>
+
+          <!-- จำนวนวันที่คำนวณ -->
+          <div class="mt-4 bg-sky-50 border border-sky-200 rounded-2xl p-4 flex justify-between items-center text-blue-900">
+            <span data-i18n="totalDaysLabel" class="text-sm font-medium">จำนวนวันที่ยืมรถทั้งหมด:</span>
+            <span class="text-xl font-bold text-blue-600">
+              <span id="daysCount">0</span> <span data-i18n="daysUnit">วัน</span>
+            </span>
+          </div>
+        </div>
+
+        <hr class="border-slate-100">
+
+        <!-- Section 4: สถานที่รับและคืนรถ -->
+        <div>
+          <h2 class="text-lg font-semibold text-blue-900 mb-3 flex items-center gap-2">
+            <span class="w-2 h-6 bg-blue-600 rounded-full inline-block"></span>
+            <span data-i18n="sec4Title">4. สถานที่รับและคืนรถ</span>
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- รับรถ -->
+            <div>
+              <label for="pickupLocation" class="block text-sm font-medium text-slate-700 mb-1">
+                <span data-i18n="pickupLocLabel">สถานที่รับรถ</span> <span class="text-red-500">*</span>
+              </label>
+              <select id="pickupLocation" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition outline-none bg-slate-50 focus:bg-white">
+                <option value="" data-i18n="optSelectPickup">-- เลือกสถานที่รับรถ --</option>
+                <option value="shop" data-i18n="optShop">หน้าร้าน (ไม่มีค่าบริการ)</option>
+                <option value="city" data-i18n="optCity">บริเวณตัวเมืองสุราษฎร์ธานี (ค่าบริการ 200 บาท)</option>
+                <option value="airport" data-i18n="optAirport">สนามบินสุราษฎร์ธานี (ค่าบริการ 300 บาท)</option>
+              </select>
+            </div>
+            <!-- คืนรถ -->
+            <div>
+              <label for="returnLocation" class="block text-sm font-medium text-slate-700 mb-1">
+                <span data-i18n="returnLocLabel">สถานที่คืนรถ</span> <span class="text-red-500">*</span>
+              </label>
+              <select id="returnLocation" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition outline-none bg-slate-50 focus:bg-white">
+                <option value="" data-i18n="optSelectReturn">-- เลือกสถานที่คืนรถ --</option>
+                <option value="shop" data-i18n="optShop">หน้าร้าน (ไม่มีค่าบริการ)</option>
+                <option value="city" data-i18n="optCity">บริเวณตัวเมืองสุราษฎร์ธานี (ค่าบริการ 200 บาท)</option>
+                <option value="airport" data-i18n="optAirport">สนามบินสุราษฎร์ธานี (ค่าบริการ 300 บาท)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section Summary Card: สรุปค่าใช้จ่าย -->
+        <div class="bg-gradient-to-r from-blue-900 to-indigo-900 text-white rounded-2xl p-5 shadow-inner space-y-2">
+          <div class="flex justify-between items-center text-sm text-blue-100">
+            <span data-i18n="summaryRentalFee">ค่าเช่ารถ:</span>
+            <span class="font-medium"><span id="rentalFeeDisplay">0</span> <span data-i18n="bahtUnit">บาท</span></span>
+          </div>
+          <div class="flex justify-between items-center text-sm text-blue-100">
+            <span data-i18n="summaryDeliveryFee">ค่าบริการจัดส่งสุทธิ:</span>
+            <span class="font-medium"><span id="deliveryFeeDisplay">0</span> <span data-i18n="bahtUnit">บาท</span></span>
+          </div>
+          <hr class="border-blue-700/60 my-2">
+          <div class="flex justify-between items-center text-base md:text-lg font-bold text-sky-300">
+            <span data-i18n="summaryGrandTotal">ประมาณการราคารวมทั้งสิ้น:</span>
+            <span class="text-2xl text-white"><span id="grandTotalDisplay">0</span> <span data-i18n="bahtUnit">บาท</span></span>
+          </div>
+        </div>
+
+        <hr class="border-slate-100">
+
+        <!-- Section 5: ข้อกำหนดค่ามัดจำและประกันภัย -->
+        <div class="bg-blue-50/70 border border-blue-200 rounded-2xl p-5">
+          <h3 class="text-base font-semibold text-blue-900 mb-2 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span data-i18n="sec5Title">รายละเอียดค่ามัดจำและประกันภัยรถยนต์</span>
+          </h3>
+          <ul class="text-sm text-slate-600 space-y-1.5 list-disc list-inside">
+            <li data-i18n="depositItem1"><strong>เงินมัดจำการเช่า:</strong> 3,000 บาท (ชำระในวันรับรถ และจะได้รับคืนเต็มจำนวนทันทีเมื่อคืนรถในสภาพเดิม)</li>
+            <li data-i18n="depositItem2"><strong>ประกันภัยพื้นฐาน:</strong> รวมประกันภัยชั้น 1 แบบมีค่าเสียหายส่วนแรก (Deductible) เรียบร้อยแล้ว</li>
+            <li data-i18n="depositItem3"><strong>ประกันคุ้มครองเต็มรูปแบบ (อุปกรณ์เสริม):</strong> สามารถแจ้งความประสงค์ซื้อประกันแบบ No Deductible เพิ่มเติมได้ในวันรับรถ</li>
+          </ul>
+          <div class="mt-3 flex items-center gap-2">
+            <input type="checkbox" id="acceptTerms" required class="w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500">
+            <label for="acceptTerms" data-i18n="acceptTerms" class="text-xs text-slate-700 font-medium">ข้าพเจ้ารับทราบเงื่อนไขค่ามัดจำและประกันภัยข้างต้นแล้ว</label>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" 
+          class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-4 rounded-2xl shadow-lg shadow-emerald-500/30 transition transform active:scale-[0.99] flex items-center justify-center gap-2 text-lg">
+          <!-- LINE Icon -->
+          <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.412-.105-.53-.284l-2.003-2.833v2.457c0 .345-.281.63-.63.63-.345 0-.626-.285-.626-.63V8.108c0-.27.173-.51.43-.595.064-.022.133-.033.201-.033.21 0 .411.105.529.284l2.004 2.833V8.108c0-.345.281-.63.63-.63.345 0 .626.285.626.63v4.771zm-5.741 0c0 .345-.282.63-.63.63-.345 0-.627-.285-.627-.63V8.108c0-.345.282-.63.63-.63.345 0 .627.285.627.63v4.771zm-2.481 0H5.082c-.345 0-.627-.285-.627-.63V8.108c0-.345.282-.63.63-.63.345 0 .627.285.627.63v4.141h1.646c.348 0 .63.285.63.63 0 .345-.282.63-.63.63zM12 2C6.477 2 2 5.86 2 10.621c0 4.262 3.562 7.85 8.375 8.528.326.07.77.215.882.494.1.25.065.641.032.895-.05.385-.231 1.5-.253 1.821-.035.518.239.512.502.336 2.072-1.385 5.602-3.328 7.648-5.698C20.89 15.351 22 13.111 22 10.62 22 5.86 17.523 2 12 2z"/>
+          </svg>
+          <span data-i18n="submitBtn">ยืนยันการจองผ่าน LINE</span>
+        </button>
+
+      </form>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-blue-100 py-6 text-center text-xs text-slate-500 space-y-1">
+    <p>© 2026 เอมรถเช่าสุราษฎร์. All rights reserved. บริการรถเช่าคุณภาพ ปลอดภัย มั่นใจทุกการเดินทาง</p>
+    <p>ติดต่อสอบถามเพิ่มเติม: <a href="tel:0808612547" class="text-blue-600 font-medium hover:underline">080-861-2547</a></p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // ราคาเช่ารถต่อวัน
+    const vehiclePrices = {
+      scoopy: 300,
+      wave: 300,
+      click: 300
+    };
+
+    // อัตราค่าบริการตามสถานที่
+    const locationFees = {
+      shop: 0,
+      city: 200,
+      airport: 300
+    };
+
+    // Dictionary ข้อมูลภาษา
+    const translations = {
+      th: {
+        heroTitle: "บริการเช่ารถเดินทาง สุราษฎร์ธานี",
+        heroDesc: "กรอกข้อมูลเพื่อทำการจองรถเช่าได้ทันที พร้อมส่งใบจองเข้า LINE",
+        sec1Title: "1. ข้อมูลผู้ยืมรถ",
+        nameLabel: "ชื่อ - นามสกุล ผู้ยืมรถ",
+        namePlaceholder: "เช่น นายสมชาย ใจดี",
+        phoneLabel: "เบอร์โทรศัพท์ติดต่อ",
+        phonePlaceholder: "เช่น 080-861-2547",
+        sec2Title: "2. เลือกรถเช่า",
+        vehicleLabel: "รุ่นรถที่ต้องการเช่า",
+        optSelectVehicle: "-- กรุณาเลือกรถ --",
+        optScoopy: "Honda Scoopy i (300 บาท/วัน)",
+        optWave: "Honda Wave (300 บาท/วัน)",
+        optClick: "Honda Click (300 บาท/วัน)",
+        sec3Title: "3. ระยะเวลาและกำหนดการ",
+        pickupDateLabel: "วันและเวลาที่รับรถ",
+        returnDateLabel: "วันและเวลาที่คืนรถ",
+        totalDaysLabel: "จำนวนวันที่ยืมรถทั้งหมด:",
+        daysUnit: "วัน",
+        sec4Title: "4. สถานที่รับและคืนรถ",
+        pickupLocLabel: "สถานที่รับรถ",
+        returnLocLabel: "สถานที่คืนรถ",
+        optSelectPickup: "-- เลือกสถานที่รับรถ --",
+        optSelectReturn: "-- เลือกสถานที่คืนรถ --",
+        optShop: "หน้าร้าน (ไม่มีค่าบริการ)",
+        optCity: "บริเวณตัวเมืองสุราษฎร์ธานี (ค่าบริการ 200 บาท)",
+        optAirport: "สนามบินสุราษฎร์ธานี (ค่าบริการ 300 บาท)",
+        summaryRentalFee: "ค่าเช่ารถ:",
+        summaryDeliveryFee: "ค่าบริการจัดส่งสุทธิ:",
+        summaryGrandTotal: "ประมาณการราคารวมทั้งสิ้น:",
+        bahtUnit: "บาท",
+        sec5Title: "รายละเอียดค่ามัดจำและประกันภัยรถยนต์",
+        depositItem1: "<strong>เงินมัดจำการเช่า:</strong> 3,000 บาท (ชำระในวันรับรถ และจะได้รับคืนเต็มจำนวนทันทีเมื่อคืนรถในสภาพเดิม)",
+        depositItem2: "<strong>ประกันภัยพื้นฐาน:</strong> รวมประกันภัยชั้น 1 แบบมีค่าเสียหายส่วนแรก (Deductible) เรียบร้อยแล้ว",
+        depositItem3: "<strong>ประกันคุ้มครองเต็มรูปแบบ (อุปกรณ์เสริม):</strong> สามารถแจ้งความประสงค์ซื้อประกันแบบ No Deductible เพิ่มเติมได้ในวันรับรถ",
+        acceptTerms: "ข้าพเจ้ารับทราบเงื่อนไขค่ามัดจำและประกันภัยข้างต้นแล้ว",
+        submitBtn: "ยืนยันการจองผ่าน LINE",
+        alertDateError: "กรุณาเลือกวันและเวลาคืนรถให้มากกว่าวันรับรถครับ"
+      },
+      en: {
+        heroTitle: "Car & Bike Rental Service in Surat Thani",
+        heroDesc: "Fill out the form below to book your vehicle and send booking via LINE.",
+        sec1Title: "1. Borrower Information",
+        nameLabel: "Full Name",
+        namePlaceholder: "e.g. John Doe",
+        phoneLabel: "Phone Number",
+        phonePlaceholder: "e.g. 080-861-2547",
+        sec2Title: "2. Select Vehicle",
+        vehicleLabel: "Vehicle Model",
+        optSelectVehicle: "-- Select Vehicle --",
+        optScoopy: "Honda Scoopy i (300 THB/day)",
+        optWave: "Honda Wave (300 THB/day)",
+        optClick: "Honda Click (300 THB/day)",
+        sec3Title: "3. Rental Schedule",
+        pickupDateLabel: "Pickup Date & Time",
+        returnDateLabel: "Return Date & Time",
+        totalDaysLabel: "Total Rental Duration:",
+        daysUnit: "Day(s)",
+        sec4Title: "4. Pickup & Return Location",
+        pickupLocLabel: "Pickup Location",
+        returnLocLabel: "Return Location",
+        optSelectPickup: "-- Select Pickup Location --",
+        optSelectReturn: "-- Select Return Location --",
+        optShop: "Main Store (Free)",
+        optCity: "Surat Thani City Area (+200 THB)",
+        optAirport: "Surat Thani Airport (+300 THB)",
+        summaryRentalFee: "Rental Fee:",
+        summaryDeliveryFee: "Total Delivery Fee:",
+        summaryGrandTotal: "Estimated Grand Total:",
+        bahtUnit: "THB",
+        sec5Title: "Deposit & Insurance Details",
+        depositItem1: "<strong>Security Deposit:</strong> 3,000 THB (Paid upon pickup and fully refunded when returning the car in original condition)",
+        depositItem2: "<strong>Basic Insurance:</strong> Standard Comprehensive Insurance with Deductible included",
+        depositItem3: "<strong>Full Protection (Optional):</strong> Full No-Deductible coverage can be added on pickup day",
+        acceptTerms: "I acknowledge and agree to the security deposit and insurance terms above.",
+        submitBtn: "Confirm Booking via LINE",
+        alertDateError: "Please select a return date and time after the pickup date."
+      }
+    };
+
+    let currentLang = 'th';
+
+    // ฟังก์ชันสำหรับสลับภาษา
+    function changeLanguage(lang) {
+      currentLang = lang;
+
+      const btnTH = document.getElementById('langTH');
+      const btnEN = document.getElementById('langEN');
+
+      if (lang === 'th') {
+        btnTH.className = "px-3 py-1 rounded-lg transition-all duration-200 shadow-sm bg-blue-600 text-white";
+        btnEN.className = "px-3 py-1 rounded-lg transition-all duration-200 text-slate-600 hover:text-blue-600";
+      } else {
+        btnEN.className = "px-3 py-1 rounded-lg transition-all duration-200 shadow-sm bg-blue-600 text-white";
+        btnTH.className = "px-3 py-1 rounded-lg transition-all duration-200 text-slate-600 hover:text-blue-600";
+      }
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang][key]) {
+          el.innerHTML = translations[lang][key];
+        }
+      });
+
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (translations[lang][key]) {
+          el.placeholder = translations[lang][key];
+        }
+      });
+    }
+
+    // Element References
+    const vehicleSelect = document.getElementById('vehicleSelect');
+    const pickupInput = document.getElementById('pickupDateTime');
+    const returnInput = document.getElementById('returnDateTime');
+    const daysCountElement = document.getElementById('daysCount');
+    const pickupSelect = document.getElementById('pickupLocation');
+    const returnSelect = document.getElementById('returnLocation');
+
+    const rentalFeeDisplay = document.getElementById('rentalFeeDisplay');
+    const deliveryFeeDisplay = document.getElementById('deliveryFeeDisplay');
+    const grandTotalDisplay = document.getElementById('grandTotalDisplay');
+
+    // ฟังก์ชันคำนวณราคาทั้งหมด
+    function calculateTotal() {
+      let days = 0;
+      const pickupVal = pickupInput.value;
+      const returnVal = returnInput.value;
+
+      if (pickupVal && returnVal) {
+        const pickupDate = new Date(pickupVal);
+        const returnDate = new Date(returnVal);
+
+        if (returnDate > pickupDate) {
+          const diffTime = Math.abs(returnDate - pickupDate);
+          days = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        }
+      }
+      daysCountElement.textContent = days;
+
+      const selectedVehicle = vehicleSelect.value;
+      const pricePerDay = vehiclePrices[selectedVehicle] || 0;
+      const rentalFee = pricePerDay * days;
+      rentalFeeDisplay.textContent = rentalFee.toLocaleString();
+
+      const pFee = locationFees[pickupSelect.value] || 0;
+      const rFee = locationFees[returnSelect.value] || 0;
+      const deliveryFee = pFee + rFee;
+      deliveryFeeDisplay.textContent = deliveryFee.toLocaleString();
+
+      const grandTotal = rentalFee + deliveryFee;
+      grandTotalDisplay.textContent = grandTotal.toLocaleString();
+    }
+
+    // Event Listeners
+    vehicleSelect.addEventListener('change', calculateTotal);
+    pickupInput.addEventListener('change', calculateTotal);
+    returnInput.addEventListener('change', calculateTotal);
+    pickupSelect.addEventListener('change', calculateTotal);
+    returnSelect.addEventListener('change', calculateTotal);
+
+    // ฟังก์ชันเมื่อกดส่งฟอร์มเพื่อส่งเข้า LINE
+    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const pickupDate = new Date(pickupInput.value);
+      const returnDate = new Date(returnInput.value);
+
+      if (returnDate <= pickupDate) {
+        alert(translations[currentLang].alertDateError);
+        return;
+      }
+
+      const name = document.getElementById('borrowerName').value;
+      const phone = document.getElementById('borrowerPhone').value;
+      const days = daysCountElement.textContent;
+      const vehicleText = vehicleSelect.options[vehicleSelect.selectedIndex].text;
+      const pickupText = pickupSelect.options[pickupSelect.selectedIndex].text;
+      const returnText = returnSelect.options[returnSelect.selectedIndex].text;
+      const grandTotal = grandTotalDisplay.textContent;
+
+      // จัดรูปแบบข้อความสรุปการจองสำหรับส่งเข้า LINE
+      const lineMessage = `📋 *ใบจองรถเช่า - เอมรถเช่าสุราษฎร์*\n` +
+        `----------------------------------\n` +
+        `👤 ชื่อผู้เช่า: ${name}\n` +
+        `📞 เบอร์โทร: ${phone}\n` +
+        `🚗 รุ่นรถ: ${vehicleText}\n` +
+        `📅 วันรับรถ: ${pickupInput.value.replace('T', ' ')}\n` +
+        `📅 วันคืนรถ: ${returnInput.value.replace('T', ' ')}\n` +
+        `⏱️ ระยะเวลา: ${days} วัน\n` +
+        `📍 รับรถที่: ${pickupText}\n` +
+        `📍 คืนรถที่: ${returnText}\n` +
+        `💰 ราคารวมทั้งสิ้น: ${grandTotal} บาท\n` +
+        `----------------------------------\n` +
+        `สอบถาม/ยืนยันการจองครับ/ค่ะ`;
+
+      // ลิงก์ URL Scheme ของ LINE สำหรับเปิดแอปและวางข้อความลงในช่องส่งข้อความทันที
+      const lineUrl = `https://line.me/R/msg/text/?${encodeURIComponent(lineMessage)}`;
+
+      // เปลี่ยนหน้าไปยังแอป LINE
+      window.location.href = lineUrl;
+    });
+  </script>
+</body>
+</html>
